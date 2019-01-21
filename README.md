@@ -3,7 +3,7 @@ A simple Node.js frontend for my Raspberry PI to display the water temperature a
 
 Components:
 Raspberry PI 
-  Raspbian (Stretch)
+Raspbian (Stretch)
 
 DS18B20 Temperature Sensor
 
