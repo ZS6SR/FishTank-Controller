@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Fishtank Controller</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<link href="/css/styles.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<h1>Fishtank Controller v0.3</h1>
+		<br />
+		<h2>Water Temperature</h2>
+		<div id="waterTemperature">
+			<div id="currentWaterTemp" />
+		</div>
+		<br />
+		<h2>White Light (1)</h2>
+		<div id="lightButton">
+			<input type='checkbox' name='whiteLight_1' id="whiteLight_1"/><label for="whiteLight_1"></label>
+		</div>
+		<h2>Blue Light</h2>
+		<div id="lightButton">
+			<input type='checkbox' name='blueLight_1' id="blueLight_1"/><label for="blueLight_1"></label>
+		</div>
+		<script src="/js/socketComms.js"></script>
+	</body>
+</html>

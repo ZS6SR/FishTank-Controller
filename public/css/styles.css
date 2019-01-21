@@ -1,0 +1,60 @@
+body {
+	padding: 20px;
+	background-color: #001a66;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	color: white;
+	//font-family: verdana;
+	font-size: 40px;
+}
+
+h2 {
+	color: white;
+	font-family: verdana;
+	font-size: 20px;
+}
+	  
+h3 {
+	color: white;
+	font-family: verdana;
+	font-size: 15px;
+}
+	
+#currentWaterTemp {
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 10px;
+	padding: 20px;
+	height: 50px;
+	width: 100px;
+	color: black;
+	background-color: lightblue;
+	font-family: verdana;
+	font-size: 40px;
+}
+
+input[type=checkbox] {
+	display:none;
+}
+  
+input[type=checkbox] + label {
+	//background: #FF0000;
+	//border-radius: 10px;
+	background: url('/imgs/red.png') 0 0;
+	padding: 20px;
+	height: 40px;
+	width: 30px;
+	display:inline-block;
+}
+   
+input[type=checkbox]:checked + label {
+	//background: #00FF00 ;
+	//border-radius: 10px;
+	background: url('/imgs/green.png') 0 0;
+	padding: 20px;
+	height: 40px;
+	width: 30px;
+	display:inline-block;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "ftc",
+  "version": "1.0.0",
+  "description": "Fishtank Controller: Display Water Temperature, Water Flow and turn a couple of lights on/off.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean Riley",
+  "license": "ISC",
+  "dependencies": {
+    "ds18b20": "^0.1.0",
+    "express": "^4.16.4",
+    "onoff": "^3.2.2",
+    "socket.io": "^2.2.0"
+  }
+}
