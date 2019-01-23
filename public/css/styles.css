@@ -58,3 +58,8 @@ input[type=checkbox]:checked + label {
 	width: 30px;
 	display:inline-block;
 }
+
+img {
+	height: 200px;
+	width: 500px;
+}
