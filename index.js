@@ -3,8 +3,10 @@ var socket	= require('socket.io');
 var ds18b20 = require('ds18b20'); //used to read temperature sensor
 var tempInt = 3000; //read the temperature everyt 3 seconds
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-var white_1 = new Gpio(17, 'out'); //use GPIO pin 4 as output
-var blue_1 = new Gpio(27, 'out'); //use GPIO pin 17 as output
+var white_1 = new Gpio(26, 'out'); //use GPIO pin 26 as output
+var blue_1 = new Gpio(19, 'out'); //use GPIO pin 19 as output
+var white_2 = new Gpio(13, 'out'); //use GPIO pin 13 as output
+var blue_2 = new Gpio(6, 'out'); //use GPIO pin 6 as output
 
 var appPort = 8080;
 
@@ -43,6 +45,22 @@ io.on('connection', function(socket) {
 		}
 	});
 	
+//============================== WHITE LIGHT TWO ==============================
+	//Check the status of the Blue Light and return that so we can use the correct image
+	socket.on('check_whiteLight_2', function(w2Data) { // Check the status of the white_1 light
+		//console.log("White Light pin is >" + white_2.readSync() + "<");
+		socket.emit('w2_status', white_2.readSync());
+	});
+	
+	//Control the White1 Light
+	var w2_value = 0; //static variable for current White_2 status
+	socket.on('white2_toggle', function(w2data) { //get light switch status from client
+		w2_value = w2data;
+		if (w2_value != white_2.readSync()) { //only change LED if status has changed
+			white_2.writeSync(w2_value); //turn LED on or off
+		}
+	});
+	
 //============================== BLUE LIGHT ONE ==============================
 	//Check the status of the Blue Light and return that so we can use the correct image
 	socket.on('check_blueLight_1', function(b1Data) { // Check the status of the blue_1 light
@@ -56,6 +74,22 @@ io.on('connection', function(socket) {
 		b1_value = b1data;
 		if (b1_value != blue_1.readSync()) { //only change Light if status has changed
 			blue_1.writeSync(b1_value); //turn Light on or off
+		}
+	});
+	
+//============================== BLUE LIGHT TWO ==============================
+	//Check the status of the Blue Light and return that so we can use the correct image
+	socket.on('check_blueLight_2', function(b2Data) { // Check the status of the blue_1 light
+		//console.log("Blue Light pin is >" + blue_2.readSync() + "<");
+		socket.emit('b2_status', blue_2.readSync());
+	});
+	
+	//Control the Blue1 Light
+	var b2_value = 0; //static variable for current blue_2 status
+	socket.on('blue2_toggle', function(b2data) { //get light switch status from client
+		b2_value = b2data;
+		if (b2_value != blue_2.readSync()) { //only change Light if status has changed
+			blue_2.writeSync(b2_value); //turn Light on or off
 		}
 	});
 	
