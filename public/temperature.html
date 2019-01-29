@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Water Temperatures</title>
+		<title>Ambient Conditions</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="/css/styles.css" type="text/css" rel="stylesheet" />
+		<link href="/css/w3.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
-		<h1>Water Temperatures</h1>
-		<img src="/imgs/waterTemp_2days.png" alt="Last 2 Days Temps"/>
-		<img src="/imgs/waterTemp_2weeks.png" alt="Last 2 Weeks Temps" />
-		<img src="/imgs/waterTemp_2months.png" alt="Last 2 Months Temp"/>
-		<img src="/imgs/waterTemp_2years.png" alt="Last 2 Years Temp"/>
-	</body>
+	<div class="w3-panel w3-center">
+		<h1>Ambient Conditions</h1>
+	</div>
+	<div class="w3-row">
+		<header class="w3-container w3-center">
+			<h2>Water Temperature</h2>
+		</header>
+		<div class="w3-container w3-center">	
+			<img src="/imgs/waterTemp_2days.png" alt="Last 2 Water Days Temps" class="w3-image" onClick="window.open('http://192.168.100.50:8080/waterTempDetail.html', '_self')"/>
+		</div>
+	</div>
+	<div class="w3-row">
+		<header class="w3-container w3-center">
+			<h2>Room Temperature</h2>
+		</header>
+		<div class="w3-container w3-center">	
+			<img src="/imgs/waterTemp_2days.png" alt="Last 2 Water Days Temps" class="w3-image" onClick="window.open('http://192.168.100.50:8080/waterTempDetail.html', '_self')"/>
+		</div>
+	</div>
 	</body>
 </html>
 
