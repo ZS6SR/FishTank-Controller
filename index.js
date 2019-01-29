@@ -103,7 +103,11 @@ function getCurrentTemp() {
 process.on('SIGINT', function () { //on ctrl+c
   white_1.writeSync(0); // Turn LED off
   white_1.unexport(); // Unexport LED GPIO to free resources
+  white_2.writeSync(0); // Turn LED off
+  white_2.unexport(); // Unexport LED GPIO to free resources
   blue_1.writeSync(0); // Turn LED off
   blue_1.unexport(); // Unexport LED GPIO to free resources
+  blue_2.writeSync(0); // Turn LED off
+  blue_2.unexport(); // Unexport LED GPIO to free resources
   process.exit(); //exit completely
 });
