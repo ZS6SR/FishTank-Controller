@@ -22,7 +22,19 @@ h3 {
 	font-size: 15px;
 }
 	
-#tempBox {
+#waterTempBox {
+	width: 200px;
+	height: 100px;
+	padding: 25px;
+	float: none;
+	margin: 0 auto;	
+	font: 50px "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#roomTempBox {
 	width: 200px;
 	height: 100px;
 	padding: 25px;
