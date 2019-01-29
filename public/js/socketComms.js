@@ -2,7 +2,8 @@
 var socket	= io.connect("http://192.168.100.50:8080");
 
 //Query DOM
-var currentTempTxtField = document.getElementById("tempBox");
+var currentWaterTempTxtField = document.getElementById("waterTempBox");
+var currentRoomTempTxtField = document.getElementById("roomTempBox");
 var w1checkBox	= document.getElementById("whiteLight_1");
 var w2checkBox	= document.getElementById("whiteLight_2");
 var b1checkBox	= document.getElementById("blueLight_1");
@@ -40,8 +41,12 @@ b2checkBox.addEventListener('change', function(){
 //on or RED if ligth is off)
 //===============================
 
-socket.on('currentTemp',function(data){
-	currentTempTxtField.innerHTML = data;
+socket.on('currentWaterTemp',function(data){
+	currentWaterTempTxtField.innerHTML = data;
+});
+
+socket.on('currentRoomTemp',function(data){
+	currentRoomTempTxtField.innerHTML = data;
 });
 	
 socket.on('w1_status',function(w1Status){
