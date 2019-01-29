@@ -16,7 +16,7 @@ Node.js
 PM2 - to run and manage the app at startup.  
 Express  
 Socket.Io  
-DS18B20
+DS18B20  
 OnOff - To controll the GPIO pins on the Raspberry Pi  
   
 Python (used for the RRD database to hold the water temperatures so I can build a graph or two)  
