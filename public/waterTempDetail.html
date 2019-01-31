@@ -7,26 +7,28 @@
 		<link href="/css/w3.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
-	<div class="w3-panel w3-twothird w3-center">
+	<div class="w3-panel w3-center w3-blue-grey">
 		<h1>Water Temperatures</h1>
 	</div>
-	<div class="w3-row">
-		<div class="w3-container w3-third w3-center">	
-		<img src="/imgs/waterTemp_2days.png" alt="Last 2 Days Temps" class="w3-image"/>
-		</div>
-		<div class="w3-container w3-third w3-center">
-		<img src="/imgs/waterTemp_2weeks.png" alt="Last 2 Weeks Temps" class="w3-image"/>
-		</div>
-	</div>
-	<div class="w3-row">
-		<div class="w3-container w3-third w3-center">
-		<img src="/imgs/waterTemp_2months.png" alt="Last 2 Months Temp" class="w3-image"/>
-		</div>
-		<div class="w3-container w3-third w3-center">
-		<img src="/imgs/waterTemp_2years.png" alt="Last 2 Years Temp" class="w3-image"/>
-		</div>
-	</div>
-	</body>
+	<header class="w3-panel w3-center">
+		<h3>2 Day Graph</h3>
+	<header>
+	<img src="/imgs/waterTemp_2days.png" alt="Last 2 Days Temps" class="w3-image" onClick="window.open('http://192.168.100.50:8080/detailGraphs/2DayWaterGraph.html', '_self')"/>
+
+	<header class="w3-panel w3-center">
+		<h3>2 Week Graph</h3>
+	</header>
+	<img src="/imgs/waterTemp_2weeks.png" alt="Last 2 Weeks Temps" class="w3-image" onClick="window.open('http://192.168.100.50:8080/detailGraphs/2WeekWaterGraph.html', '_self')"/>
+
+	<header class="w3-panel w3-center">
+		<h3>2 Month Graph</h3>
+	</header>
+	<img src="/imgs/waterTemp_2months.png" alt="Last 2 Months Temp" class="w3-image" onClick="window.open('http://192.168.100.50:8080/detailGraphs/2MonthWaterGraph.html', '_self')"/>
+
+	<header class="w3-panel w3-center">
+		<h3>2 Year Graph</h3>
+	</header>
+	<img src="/imgs/waterTemp_2years.png" alt="Last 2 Years Temp" class="w3-image" onClick="window.open('http://192.168.100.50:8080/detailGraphs/2YearWaterGraph.html', '_self')"/>
+
 	</body>
 </html>
-
