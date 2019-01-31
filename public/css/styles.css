@@ -21,6 +21,12 @@ h3 {
 	font-family: verdana;
 	font-size: 15px;
 }
+
+h4 {
+	color: white;
+	font-family: verdana;
+	font-size: 15px;
+}
 	
 #waterTempBox {
 	width: 200px;
