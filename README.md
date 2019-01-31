@@ -7,6 +7,7 @@ Raspberry PI
 Relay board to control lights  
 DS18B20 Temperature Sensor for the Water Temp.  
 AM2302 Temperature/Humidity Sensor for Room conditions  
+BMP085 Temperature / Barometric Pressure for extra room conditions  
 2x Cool white LED strip  
 2x Blue LED strip  
 
@@ -17,6 +18,7 @@ Node.js
 PM2 - to run and manage the app at startup.  
 Express  
 Socket.Io  
+i2c-bus - I am not sure I need this but I would love to get Node.js to read the BMP085 and display the hPa  
 DS18B20  
 node-dht-sensor  
 OnOff - To controll the GPIO pins on the Raspberry Pi  
