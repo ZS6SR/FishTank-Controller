@@ -1,6 +1,6 @@
 var express	= require('express');
 var socket	= require('socket.io');
-var ds18b20 = require('ds18b20'); //used to read temperature sensor
+var ds18b20 = require('ds18b20'); //used to read temperature sensor AM2302
 var dht22_sensor = require('node-dht-sensor'); //Used to read the temp and humidity on the DHT22 sensor
 var tempInt = 3000; //read the temperature everyt 3 seconds
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
@@ -8,7 +8,6 @@ var white_1 = new Gpio(26, 'out'); //use GPIO pin 26 as output
 var blue_1 = new Gpio(19, 'out'); //use GPIO pin 19 as output
 var white_2 = new Gpio(13, 'out'); //use GPIO pin 13 as output
 var blue_2 = new Gpio(6, 'out'); //use GPIO pin 6 as output
-
 
 var appPort = 8080;
 
@@ -26,20 +25,20 @@ var io		= socket(server);
 
 io.on('connection', function(socket) {
 	//console.log("New Connection: " + socket.id);
-	
+
 	//As soon as a scoket connects send the current temperature
 	//console.log("Current Water Temperature >" + getCurrentWaterTemp() + "<");
 	socket.emit("currentWaterTemp", getCurrentWaterTemp());
-	console.log("Current Room Temperature >" + getCurrentRoomTemp() + "<");
+	//console.log("Current Room Temperature >" + getCurrentRoomTemp() + "<");
 	socket.emit("currentRoomTemp", getCurrentRoomTemp());
-	
+
 //============================== WHITE LIGHT ONE ==============================
 	//Check the status of the Blue Light and return that so we can use the correct image
 	socket.on('check_whiteLight_1', function(w1Data) { // Check the status of the white_1 light
 		//console.log("White Light pin is >" + white_1.readSync() + "<");
 		socket.emit('w1_status', white_1.readSync());
 	});
-	
+
 	//Control the White1 Light
 	var w1_value = 0; //static variable for current redLED status
 	socket.on('white1_toggle', function(w1data) { //get light switch status from client
@@ -48,14 +47,14 @@ io.on('connection', function(socket) {
 			white_1.writeSync(w1_value); //turn LED on or off
 		}
 	});
-	
+
 //============================== WHITE LIGHT TWO ==============================
 	//Check the status of the Blue Light and return that so we can use the correct image
 	socket.on('check_whiteLight_2', function(w2Data) { // Check the status of the white_1 light
 		//console.log("White Light pin is >" + white_2.readSync() + "<");
 		socket.emit('w2_status', white_2.readSync());
 	});
-	
+
 	//Control the White1 Light
 	var w2_value = 0; //static variable for current White_2 status
 	socket.on('white2_toggle', function(w2data) { //get light switch status from client
@@ -64,14 +63,14 @@ io.on('connection', function(socket) {
 			white_2.writeSync(w2_value); //turn LED on or off
 		}
 	});
-	
+
 //============================== BLUE LIGHT ONE ==============================
 	//Check the status of the Blue Light and return that so we can use the correct image
 	socket.on('check_blueLight_1', function(b1Data) { // Check the status of the blue_1 light
 		//console.log("Blue Light pin is >" + blue_1.readSync() + "<");
 		socket.emit('b1_status', blue_1.readSync());
 	});
-	
+
 	//Control the Blue1 Light
 	var b1_value = 0; //static variable for current blue_1 status
 	socket.on('blue1_toggle', function(b1data) { //get light switch status from client
@@ -80,14 +79,14 @@ io.on('connection', function(socket) {
 			blue_1.writeSync(b1_value); //turn Light on or off
 		}
 	});
-	
+
 //============================== BLUE LIGHT TWO ==============================
 	//Check the status of the Blue Light and return that so we can use the correct image
 	socket.on('check_blueLight_2', function(b2Data) { // Check the status of the blue_1 light
 		//console.log("Blue Light pin is >" + blue_2.readSync() + "<");
 		socket.emit('b2_status', blue_2.readSync());
 	});
-	
+
 	//Control the Blue1 Light
 	var b2_value = 0; //static variable for current blue_2 status
 	socket.on('blue2_toggle', function(b2data) { //get light switch status from client
@@ -96,7 +95,7 @@ io.on('connection', function(socket) {
 			blue_2.writeSync(b2_value); //turn Light on or off
 		}
 	});
-	
+
 });
 
 //Read the value from the "DS18B20" sensor
@@ -106,7 +105,7 @@ function getCurrentWaterTemp() {
 
 function getCurrentRoomTemp() {
 	var tempHumid = dht22_sensor.read(22, 5);
-	console.log('temp: ' + tempHumid.temperature.toFixed(1) + '°C, humidity: ' + tempHumid.humidity.toFixed(1) + '%');
+	//console.log('temp: ' + tempHumid.temperature.toFixed(1) + '°C, humidity: ' + tempHumid.humidity.toFixed(1) + '%');
 	return tempHumid.temperature.toFixed(1);
 }
 
