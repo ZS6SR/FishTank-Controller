@@ -6,7 +6,8 @@ import rrdtool
 temp_db = "/home/pi/nodetests/ftc/public/rrd/pressure.rrd"
 
 bmp = BMP085.BMP085(mode=BMP085.BMP085_HIGHRES)
- 
+
+#temp = bmp.read_temperature() 
 realPress = bmp.read_pressure()
 altitude = bmp.read_altitude()
 
