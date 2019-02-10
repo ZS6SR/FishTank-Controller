@@ -3,7 +3,7 @@
 import Adafruit_BMP.BMP085 as BMP085 
 import rrdtool
 
-temp_db = "/home/pi/nodetests/ftc/public/rrd/pressure.rrd"
+temp_db = "/home/pi/ftc/public/rrd/pressure.rrd"
 
 bmp = BMP085.BMP085(mode=BMP085.BMP085_HIGHRES)
 

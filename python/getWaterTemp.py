@@ -5,7 +5,7 @@ import glob
 import time
 import rrdtool
 
-temp_db = "/home/pi/nodetests/ftc/public/rrd/waterTemp.rrd"
+temp_db = "/home/pi/ftc/public/rrd/waterTemp.rrd"
 #temp_db = "waterTemp.rrd";
 
 os.system('modprobe w1-gpio')

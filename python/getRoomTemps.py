@@ -4,7 +4,7 @@ import Adafruit_BMP.BMP085 as BMP085
 import Adafruit_DHT as dht
 import rrdtool
 
-temp_db = "/home/pi/nodetests/ftc/public/rrd/roomTemps.rrd"
+temp_db = "/home/pi/ftc/public/rrd/roomTemps.rrd"
 
 bmp = BMP085.BMP085(mode=BMP085.BMP085_HIGHRES)
 

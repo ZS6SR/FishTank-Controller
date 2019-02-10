@@ -3,7 +3,7 @@
 import Adafruit_DHT as dht
 import rrdtool
 
-temp_db = "/home/pi/nodetests/ftc/public/rrd/humidity.rrd"
+temp_db = "/home/pi/ftc/public/rrd/humidity.rrd"
 
 h,t = dht.read_retry(dht.DHT22, 5)
 

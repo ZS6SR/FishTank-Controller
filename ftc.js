@@ -1,27 +1,87 @@
-var express	= require('express');
-var socket	= require('socket.io');
-var ds18b20 = require('ds18b20'); //used to read temperature sensor AM2302
-var dht22_sensor = require('node-dht-sensor'); //Used to read the temp and humidity on the DHT22 sensor
-var tempInt = 3000; //read the temperature everyt 3 seconds
-var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-var white_1 = new Gpio(26, 'out'); //use GPIO pin 26 as output
-var blue_1 = new Gpio(19, 'out'); //use GPIO pin 19 as output
-var white_2 = new Gpio(13, 'out'); //use GPIO pin 13 as output
-var blue_2 = new Gpio(6, 'out'); //use GPIO pin 6 as output
+const express      = require('express');
+const bodyParser   = require("body-parser");
+const socket	   = require('socket.io');
+const ds18b20      = require('ds18b20'); //used to read temperature sensor AM2302
+const dht22_sensor = require('node-dht-sensor'); //Used to read the temp and humidity on the DHT22 sensor
+const tempInt      = 3000; //read the temperature everyt 3 seconds
+const Gpio         = require('onoff').Gpio; //include onoff to interact with the GPIO
+const white_1      = new Gpio(26, 'out'); //use GPIO pin 26 as output
+const blue_1       = new Gpio(19, 'out'); //use GPIO pin 19 as output
+const white_2      = new Gpio(13, 'out'); //use GPIO pin 13 as output
+const blue_2       = new Gpio(6, 'out'); //use GPIO pin 6 as output
 
-var appPort = 8080;
+const sqlite3      = require('sqlite3').verbose();
+const file         = "ftc.db";
+const db           = new sqlite3.Database(file);
+
+const appPort      = 8080;
 
 //App Setup
-var app 	= express();
-var server 	= app.listen(appPort, function(){
+const app 	       = express();
+const server       = app.listen(appPort, function(){
 	console.log("Listening for requests on port >" + appPort + "<");
 });
+
+//Socket setup
+const io	       = socket(server);
 
 //Static Files
 app.use(express.static("public"));
 
-//Socket setup
-var io		= socket(server);
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+//This is a test to see if I can post from a form
+app.post("/addEvent", function (req, res) {
+	var waterCondID = 0;
+	var cl2 = req.body.cl2;
+	var no3 = req.body.no3;
+	var no2 = req.body.no2;
+	var gh = req.body.gh;
+	var kh = req.body.kh;
+	var ph = req.body.ph;
+	var insertEvent = 'INSERT INTO events (eventDate, eventTime, eventComment, waterCondID) VALUES(?,?,?,?)';
+	
+	if (!cl2 && !no3 && !no2 && !gh && !kh && !ph) {
+		waterCondID = 0;
+		if (req.body.eventComment) {
+			db.run(insertEvent,[req.body.eventDate, req.body.eventTime, req.body.eventComment, waterCondID]);
+		};
+	}
+	else {
+		db.run('INSERT INTO waterCond (recordDate, recordTime, cl2, no3, no2, gh, kh, ph, tempAtReading) VALUES(?,?,?,?,?,?,?,?,?)', [req.body.eventDate, req.body.eventTime, cl2, no3, no2, gh, kh, ph, req.body.waterTemp]);
+		
+		db.get('SELECT seq as ID FROM sqlite_sequence WHERE name="waterCond"', [], (err, row) =>{
+			if (err) {
+				console.log(err);
+			}
+			else {
+				waterCondID = row.ID;
+				if (req.body.eventComment) {
+					db.run(insertEvent,[req.body.eventDate, req.body.eventTime, req.body.eventComment, waterCondID]);
+				};
+			}
+		});
+	}
+	
+	//console.log(req.body);
+	//res.writeHead(200, "OK", {'Content-Type': 'text/plain'});
+	res.send("Update Received!<br>" + 
+				"<hr>" + 
+				"Date   : " + req.body.eventDate + "<br>" + 
+				"Time   : " + req.body.eventTime + "<br>" + 
+				"Comment: " + req.body.eventComment + "<br>" + 
+				"Cl2    : " + req.body.cl2 + "<br>" + 
+				"NO3    : " + req.body.no3 + "<br>" + 
+				"NO2    : " + req.body.no2 + "<br>" + 
+				"GH     : " + req.body.gh + "<br>" + 
+				"KH     : " + req.body.kh + "<br>" + 
+				"pH     : " + req.body.ph + "<br>" + 
+				"Temp   : " + req.body.waterTemp);
+    res.end();
+});
 
 io.on('connection', function(socket) {
 	//console.log("New Connection: " + socket.id);
