@@ -14,6 +14,7 @@
     "i2c-bus": "^4.0.7",
     "node-dht-sensor": "0.0.34",
     "onoff": "^3.2.2",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "sqlite3": "^4.0.6"
   }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Fishtank Controller</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<link href="/css/styles.css" type="text/css" rel="stylesheet" />
+		<link href="/css/w3.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+
+<form action="/addEvent" method="post" class="w3-container w3-twothird">
+	
+	<!-- A Card with Heading and the Date and Time in the body -->
+	<!--<div class="w3-row-padding w3-padding-16 w3-center" style="max-width:768px;margin: 0 auto;">-->
+	<div class="w3-container w3-padding-16 w3-center" style="max-width:768px;">
+		<h2>Add New Event</h2>
+		<!--<div class="w3-cell w3-col m1 w3-center" style="width:768px;"> -->
+		<div class="w3-cell-row w3-padding-16">
+			<div class="w3-cell w3-center" id="DT_Cell">
+				<input class="w3-input w3-center" type="text" name="eventDate" id="eventDate" readonly>
+			</div>
+			<div class="w3-cell w3-center" id="DT_Cell">
+				<input class="w3-input w3-center" type="text" name="eventTime" id="eventTime" readonly>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Comments to the Event -->
+	<div class="w3-row-padding w3-padding-16">
+		<label><h3>Event Comment</h3></label>
+		<textarea class="w3-input" style="max-width:748px;resize:none;" name="eventComment"></textarea>
+	</div>
+	
+	<!-- Add the water parameters - If NO parameters are present then we will not insert anything into the "waterCond" table
+		 If we insert something into the database here then we will add the comment into the "events" table and include the waterCond id for the record we just inserted.
+	-->
+	<div class="w3-row-padding w3-padding-16" style="max-width:768px;">
+		<label><h3>Water Parameters</h3></label>
+
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">Cl2<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Chlorine (ppm) Required Value = 0</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="cl2">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">NO3<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Nitrate (ppm) Required Value &lt; 50</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="no3">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">NO2<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Nitrite (ppm) Required Value &lt; 0.1</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="no2">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">GH<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Total Hardness (ppm) Between 8 - 20</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="gh">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">KH<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Alkalinity (ppm) Between 5 - 12</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="kh">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">pH<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Acidity. Between 7.3 - 8.5</span></h4>
+			</header>
+			<input class="w3-input w3-center w3-hover-opacity" type="text" name="ph">
+			<footer>&nbsp;</footer>
+		</div>
+		
+		<div class="w3-card w3-cell w3-col m1 w3-center" style="width:100px">
+			<header class="w3-container w3-center">
+				<h4 class="w3-tooltip">Temp<span style="position:absolute;left:0;bottom:18px;width:120px;font-size:15px;" class="w3-text w3-tag w3-blue-grey">Current Water Temperature. Between 23C - 28C</span></h4>
+			</header>
+			<input class="w3-input w3-center" type="text" name="waterTemp" id="eventWaterTemp" readonly>
+			<footer>&nbsp;</footer>
+		</div>
+	</div>
+
+	<div class="w3-panel w3-padding-16  w3-center" style="max-width:768px;">
+		<input class="w3-button w3-round w3-blue-grey w3-xlarge" type="submit" value="Add Event">
+	</div>
+</form>
+
+<script src="/js/getDateTime.js"></script>
+	</body>
+</html>

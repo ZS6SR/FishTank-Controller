@@ -27,7 +27,14 @@ h4 {
 	font-family: verdana;
 	font-size: 15px;
 }
-	
+
+#DT_Cell {
+	color: white;
+	background-color: #001a66;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	width: 120px;
+}
+
 #waterTempBox {
 	width: 200px;
 	height: 100px;
