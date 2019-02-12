@@ -28,11 +28,44 @@ h4 {
 	font-size: 15px;
 }
 
-#DT_Cell {
-	color: white;
-	background-color: #001a66;
-	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	width: 120px;
+table {
+	border: none;
+}
+
+thead {
+	background-color: #2693ff;
+	color: black;
+	text-align: left;
+	border: none;
+	padding: 5px;
+}
+
+tr {
+	height: 40px;
+	border: none;
+	padding: 5px;
+}
+td {
+	padding: 5px;
+}
+
+tr:hover {background-color: #f5f5f5;}
+
+.odd {
+	background-color: #bfdfff;
+	color: black;
+	text-align: left;
+	border: none;
+	padding: 5px;
+}
+
+.even {
+	
+	background-color: #73b9ff;
+	color: black;
+	text-align: left;
+	border: none;
+	padding: 5px;
 }
 
 #waterTempBox {
