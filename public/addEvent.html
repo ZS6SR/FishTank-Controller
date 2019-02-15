@@ -15,7 +15,8 @@
 	<h2>Add New Event</h2>
 	<div class="w3-bar w3-border w3-light-grey">
 		<a href="http://192.168.100.50:8080" class="w3-bar-item w3-border-right w3-button">Home</a>
-		<a href="http://192.168.100.50:8080/showEvents" class="w3-bar-item w3-button">List Events</a>
+		<a href="http://192.168.100.50:8080/showEvents" class="w3-bar-item w3-border-right w3-button">List Events</a>
+		<a href="http://192.168.100.50:8080/showWaterParms.html" class="w3-bar-item w3-button">Water Parmeters</a>
 	</div>
 </div>
 <br>	
@@ -31,24 +32,7 @@
 			<input class="w3-input w3-center" type="text" name="eventTime" id="eventTime" readonly>
 		</div>
 	</div>
-
-<form action="/addEvent" method="post" class="w3-container w3-twothird">
 	
-	<!-- A Card with Heading and the Date and Time in the body -->
-	<!--<div class="w3-row-padding w3-padding-16 w3-center" style="max-width:768px;margin: 0 auto;">-->
-	<div class="w3-container w3-padding-16 w3-center" style="max-width:768px;">
-		<h2>Add New Event</h2>
-		<!--<div class="w3-cell w3-col m1 w3-center" style="width:768px;"> -->
-		<div class="w3-cell-row w3-padding-16">
-			<div class="w3-cell w3-center" id="DT_Cell">
-				<input class="w3-input w3-center" type="text" name="eventDate" id="eventDate" readonly>
-			</div>
-			<div class="w3-cell w3-center" id="DT_Cell">
-				<input class="w3-input w3-center" type="text" name="eventTime" id="eventTime" readonly>
-			</div>
-		</div>
-	</div>
-
 	<!-- Add Comments to the Event -->
 	<div class="w3-row-padding w3-padding-16">
 		<label><h3>Event Comment</h3></label>
@@ -117,6 +101,8 @@
 			<footer>&nbsp;</footer>
 		</div>
 	</div>
+
+	
 		
 	<div class="w3-padding-16 w3-center" style="max-width:768px;">
 		<input class="w3-button w3-round w3-blue-grey" type="submit" value="Submit Event">
