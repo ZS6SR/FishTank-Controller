@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Fishtank Controller</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<link href="/css/styles.css" type="text/css" rel="stylesheet" />
+		<link href="/css/w3.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+	
+	<!-- A Card with Heading and the Date and Time in the body -->
+	<div class="w3-container w3-padding-16 w3-center" style="max-width:768px;">
+		<h1>Water Parameters</h1>
+		<div class="w3-bar w3-border w3-light-grey">
+			<a href="http://192.168.100.50:8080" class="w3-bar-item w3-border-right w3-button">Home</a>
+			<a href="http://192.168.100.50:8080/showEvents" class="w3-bar-item w3-border-right w3-button">List Events</a>
+			<a href="http://192.168.100.50:8080/addEvent.html" class="w3-bar-item w3-button">Add Event</a>
+		</div>
+		<div class="w3-container w3-padding-16 w3-center" >&nbsp;</div>
+		<div class="chart-container" style="position: relative; margin: auto;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <script src="/js/waterParms.js"></script>
+	</div>
+	
+	</body>
+</html>
