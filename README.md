@@ -22,7 +22,8 @@ i2c-bus - I am not sure I need this but I would love to get Node.js to read the 
 DS18B20  
 node-dht-sensor  
 OnOff - To controll the GPIO pins on the Raspberry Pi  
-sqlite3 - this has 3 tables 1x events, 1x maint (still to be implemented, 1x waterCond to record things like pH etc
+sqlite3 - this has 3 tables 1x events, 1x maint (still to be implemented, 1x waterCond to record things like pH etc  
+Charts.js - this is used to plot a line graph of the water parameters that are kept in the database  
   
 Python (used for the RRD database to hold the water temperatures so I can build a graph or two)  
 python-rrdtool (sudo apt-get install python-rrdtool)  
