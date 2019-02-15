@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		title Fishtank Controller
+		link(rel="stylesheet", href="/css/styles.css", type='text/css')
+		link(rel="stylesheet", href="/css/w3.css", type='text/css')
+	body
+		div.w3-panel.w3-padding-16.w3-center(style='max-width:768px;')
+			h1 New Event Added:  #{result}!
+			h4 Message: #{message}
+			br
+			h3 Event Comment: #{eventComment}
+			h4 Logged at: #{date} #{time}
+			p(style='color:white') CL2: #{cl2}
+			p(style='color:white') NO3: #{no3}
+			p(style='color:white') NO2: #{no2}
+			p(style='color:white') GH : #{gh}
+			p(style='color:white') KH : #{kh}
+			p(style='color:white') pH : #{ph}
+			p(style='color:white') Water Temperature : #{temp}
+			p
+			a.button.w3-button.w3-round.w3-blue-grey.w3-xlarge(href="http://192.168.100.50:8080/") Home
