@@ -18,6 +18,10 @@ const appPort      = 8080;
 
 //App Setup
 const app 	       = express();
+
+app.set('views', 'views');
+app.set('view engine', 'pug');
+
 const server       = app.listen(appPort, function(){
 	console.log("Listening for requests on port >" + appPort + "<");
 });
@@ -43,11 +47,27 @@ app.post("/addEvent", function (req, res) {
 	var kh = req.body.kh;
 	var ph = req.body.ph;
 	var insertEvent = 'INSERT INTO events (eventDate, eventTime, eventComment, waterCondID) VALUES(?,?,?,?)';
+	var resState    = "xxx";
+	var resMsg      = "xxx";
 	
 	if (!cl2 && !no3 && !no2 && !gh && !kh && !ph) {
-		waterCondID = 0;
 		if (req.body.eventComment) {
 			db.run(insertEvent,[req.body.eventDate, req.body.eventTime, req.body.eventComment, waterCondID]);
+			resState  = "Success";
+			resMsg = "Successfully added a new Event";
+			res.render('eventResponse', { result: resState,
+									message: resMsg,
+									date: req.body.eventDate, 
+									time: req.body.eventTime,
+									eventComment: req.body.eventComment,
+									cl2: cl2,
+									no3: no3,
+									no2: no2,
+									gh: gh,
+									kh: kh,
+									ph: ph,
+									temp: req.body.waterTemp
+									})
 		};
 	}
 	else {
@@ -56,35 +76,68 @@ app.post("/addEvent", function (req, res) {
 		db.get('SELECT seq as ID FROM sqlite_sequence WHERE name="waterCond"', [], (err, row) =>{
 			if (err) {
 				console.log(err);
+				resState  = "Fail";
+				resMsg = "Failed to insert Event: " + err;
+				res.render('eventResponse', { result: resState,
+									message: resMsg,
+									date: req.body.eventDate, 
+									time: req.body.eventTime,
+									eventComment: req.body.eventComment,
+									cl2: cl2,
+									no3: no3,
+									no2: no2,
+									gh: gh,
+									kh: kh,
+									ph: ph,
+									temp: req.body.waterTemp
+									})
 			}
 			else {
 				waterCondID = row.ID;
 				if (req.body.eventComment) {
 					db.run(insertEvent,[req.body.eventDate, req.body.eventTime, req.body.eventComment, waterCondID]);
+					resState  = "Success";
+					resMsg = "Successfully added a new Event including water conditions.";
+					res.render('eventResponse', { result: resState,
+									message: resMsg,
+									date: req.body.eventDate, 
+									time: req.body.eventTime,
+									eventComment: req.body.eventComment,
+									cl2: cl2,
+									no3: no3,
+									no2: no2,
+									gh: gh,
+									kh: kh,
+									ph: ph,
+									temp: req.body.waterTemp
+									})
 				};
 			}
 		});
 	}
 	
-	//console.log(req.body);
-	//res.writeHead(200, "OK", {'Content-Type': 'text/plain'});
-	res.send("Update Received!<br>" + 
-				"<hr>" + 
-				"Date   : " + req.body.eventDate + "<br>" + 
-				"Time   : " + req.body.eventTime + "<br>" + 
-				"Comment: " + req.body.eventComment + "<br>" + 
-				"Cl2    : " + req.body.cl2 + "<br>" + 
-				"NO3    : " + req.body.no3 + "<br>" + 
-				"NO2    : " + req.body.no2 + "<br>" + 
-				"GH     : " + req.body.gh + "<br>" + 
-				"KH     : " + req.body.kh + "<br>" + 
-				"pH     : " + req.body.ph + "<br>" + 
-				"Temp   : " + req.body.waterTemp);
-    res.end();
+});
+
+app.get("/showEvents", function (req, res) {
+	db.all("SELECT * FROM events order by id desc", function(err, rows) {
+		res.render('showEvents', { rows: rows });
+	});
+});
+
+app.get("/showWaterParms", function (req, res) {
+	res.render('showWaterParms');
 });
 
 io.on('connection', function(socket) {
 	//console.log("New Connection: " + socket.id);
+
+//============================== Send back the waterParameters that wer ecollected ==============================
+	//socket.on('waterParms', function() {
+	//	console.log("About to Fetch water Params data");
+		db.all("SELECT * FROM waterCond", function(err, rows) {
+			socket.emit('waterParams', rows);
+		});
+	//});
 
 	//As soon as a scoket connects send the current temperature
 	//console.log("Current Water Temperature >" + getCurrentWaterTemp() + "<");
@@ -155,7 +208,6 @@ io.on('connection', function(socket) {
 			blue_2.writeSync(b2_value); //turn Light on or off
 		}
 	});
-
 });
 
 //Read the value from the "DS18B20" sensor
