@@ -13,8 +13,9 @@
 
 <div class="w3-row">
 	<div class="w3-container w3-twothird w3-center">
-		<h1>Fishtank Controller v0.5</h1>
+		<h1>Fishtank Controller v1.0</h1>
 		<div class="w3-bar w3-light-grey">
+			<a href="http://192.168.100.50:8080/showWaterParms.html" class="w3-bar-item w3-border-right w3-button">Water Parmeters</a>
 			<a href="http://192.168.100.50:8080/showEvents" class="w3-bar-item w3-border-right w3-button">List Events</a>
 			<a href="http://192.168.100.50:8080/addEvent.html" class="w3-bar-item w3-button">Add Event</a>
 		</div>
@@ -38,6 +39,7 @@
 		<div id="roomTempBox" class="w3-container w3-round-large w3-third w3-light-blue" onClick="window.open('http://192.168.100.50:8080/roomCondDetail.html', '_self')"></div>
 	</div>
 </div>
+
 <div class="w3-row">
 	<div class="w3-panel w3-third w3-center">
 		<header class="w3-container">
@@ -45,7 +47,7 @@
 		</header>
 		<div class="w3-container">
 			<div id="lightButton">
-				<input type='checkbox' name='whiteLight_1' class="w3-round" id="whiteLight_1"/><label for="whiteLight_1"></label>
+				<input type='checkbox' name='whiteLight_1' id="whiteLight_1"/><label for="whiteLight_1"></label>
 			</div>
 		</div>
 	</div>
@@ -60,17 +62,15 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-<div class=w3-row>
-	<div class="w3=panel w3-third w3-center">
+<div class="w3-row">
+	<div class="w3-panel w3-third w3-center">
 		<header class="w3-container">
 			<h3>Blue Light (1)</h3>
 		</header>
 		<div class="w3-container">
 			<div id="lightButton">
-				<input style="height:100px;" type='checkbox' name='blueLight_1' id="blueLight_1"/><label for="blueLight_1"></label>
+				<input type='checkbox' name='blueLight_1' id="blueLight_1"/><label for="blueLight_1"></label>
 			</div>
 		</div>
 	</div>
@@ -81,12 +81,12 @@
 		</header>
 		<div class="w3-container">
 			<div id="lightButton">
-				<input style="height:100px;" type='checkbox' name='blueLight_2' id="blueLight_2"/><label for="blueLight_2"></label>
+				<input type='checkbox' name='blueLight_2' id="blueLight_2"/><label for="blueLight_2"></label>
 			</div>
 		</div>
 	</div>
-
 </div>
+
 <script src="/js/socketComms.js"></script>
 	</body>
 </html>
